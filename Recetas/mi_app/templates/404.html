@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Página no encontrada{% endblock %}
+{% block content %}
+<div class="container my-5 text-center">
+  <h1 class="display-5">404</h1>
+  <p>La página o receta que buscas no existe.</p>
+  <a class="btn btn-outline-primary mt-3" href="{% url 'mi_app:index' %}">Volver al inicio</a>
+</div>
+{% endblock %}

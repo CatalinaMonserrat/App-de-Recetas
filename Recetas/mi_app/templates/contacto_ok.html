@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Mensaje enviado | App de Recetas{% endblock %}
+{% block content %}
+<div class="container my-5 text-center">
+  <h2>¡Gracias por tu mensaje!</h2>
+  <p>Te responderemos pronto.</p>
+  <a class="btn btn-dark mt-3" href="{% url 'mi_app:index' %}">Volver al inicio</a>
+</div>
+{% endblock %}
