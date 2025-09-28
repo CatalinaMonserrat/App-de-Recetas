@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio | App de Recetas{% endblock %}
+
+{% block content %}
+<!-- Jumbotron -->
+<div class="p-5 text-center bg-image rounded-3" style="
+    background-image: url('{% static 'img/jumbotron.jpg' %}');
+    height: 420px;
+    background-size: cover;
+    background-position: center;
+  ">
+  <div class="mask" style="background-color: rgba(0,0,0,0);">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3 fw-bold">Tu Recetario Online</h1>
+        <h4 class="mb-3">Encuentra y comparte recetas deliciosas</h4>
+        <a class="btn btn-warning btn-lg" href="{% url 'mi_app:recetas' %}">
+            Ver recetas
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Jumbotron -->
+
+<!-- Utimas Recetas-->
+<div class="container my-5">
+  <h2 class="mb-4">Últimas recetas</h2>
+  <div class="row g-4">
+    {% for r in ultimas %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100">
+          {% if r.imagen %}
+            <img src="{{ r.imagen.url }}" class="card-img-top" alt="{{ r.nombre }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title mb-2">{{ r.nombre }}</h5>
+            <p class="card-text text-muted">
+              {% if r.resumen %}
+                {{ r.resumen }}
+              {% else %}
+                {{ r.ingredientes|striptags|truncatechars:120 }}
+              {% endif %}
+            </p>
+            <a href="{% url 'mi_app:detalle' r.pk %}" class="btn btn-warning btn-sm"">Ver receta</a> 
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted">Aún no hay recetas. Crea algunas en <a href="/admin/">/admin</a>.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

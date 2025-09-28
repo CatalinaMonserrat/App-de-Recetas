@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{{ receta.nombre }} | Receta{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <a href="{% url 'mi_app:recetas' %}" class="btn btn-outline-secondary mb-3">&larr; Volver</a>
+
+  <div class="row g-4">
+    <div class="col-lg-6">
+      {% if receta.imagen %}
+        <img src="{{ receta.imagen.url }}" class="img-fluid rounded shadow-sm" alt="{{ receta.nombre }}">
+      {% endif %}
+    </div>
+    <div class="col-lg-6">
+      <h2 class="mb-3">{{ receta.nombre }}</h2>
+
+      {% if receta.resumen %}
+        <p class="text-muted">{{ receta.resumen }}</p>
+      {% endif %}
+
+      <h5 class="mt-4">Ingredientes</h5>
+      <p style="white-space: pre-line">{{ receta.ingredientes }}</p>
+
+      <h5 class="mt-4">Instrucciones</h5>
+      <p style="white-space: pre-line">{{ receta.instrucciones }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

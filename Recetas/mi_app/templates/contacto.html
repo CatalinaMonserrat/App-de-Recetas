@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Contacto | App de Recetas{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Contáctanos</h2>
+  <p class="text-muted">Completa el formulario y envíanos tu mensaje.</p>
+
+  <form method="post" class="row g-3">
+    {% csrf_token %}
+
+    <div class="col-md-6">
+      <label for="id_nombre" class="form-label">Nombre</label>
+      <input type="text" name="nombre" maxlength="100" required id="id_nombre"
+             class="form-control" placeholder="Escribe tu nombre">
+    </div>
+
+    <div class="col-md-6">
+      <label for="id_email" class="form-label">Correo electrónico</label>
+      <input type="email" name="email" required id="id_email"
+             class="form-control" placeholder="ejemplo@correo.com">
+    </div>
+
+    <div class="col-12">
+      <label for="id_mensaje" class="form-label">Mensaje</label>
+      <textarea name="mensaje" rows="5" required id="id_mensaje"
+                class="form-control" placeholder="Escribe tu mensaje aquí..."></textarea>
+    </div>
+
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-dark btn-lg">Enviar mensaje</button>
+    </div>
+  </form>
+
+  {% if messages %}
+    <div class="mt-4">
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Recetas | App de Recetas{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Listado de Recetas</h2>
+  <div class="row g-4">
+    {% for r in recetas %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          {% if r.imagen %}
+            <img src="{{ r.imagen.url }}" class="card-img-top" alt="{{ r.nombre }}">
+          {% else %}
+            <img src="{% static 'img/placeholder.jpg' %}" class="card-img-top" alt="Receta">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ r.nombre }}</h5>
+            <p class="card-text text-muted mb-3">
+              {% if r.resumen %}
+                {{ r.resumen }}
+              {% else %}
+                {{ r.ingredientes|striptags|truncatechars:120 }}
+              {% endif %}
+            </p>
+            <!-- Botón para ver detalle (lo activamos al crear vista detalle) -->
+            <a href="{% url 'mi_app:detalle' r.pk %}" class="btn btn-warning btn-sm">Ver receta</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted">No hay recetas aún. Agrega algunas desde el <a href="/admin/">admin</a>.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
